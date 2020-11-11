@@ -1,7 +1,7 @@
 <template>
     <div>
     <label for="">新規作成</label>
-    <v-text-field v-model="newTask" type="text" name=""/>
+    <v-text-field v-model="newTask" type="text" name="" class="postinput"/>
     <button @click='createTask'>作成</button>
     <ul class="collection">
         <li v-for="task in tasks">
@@ -9,7 +9,7 @@
              <br>
              <v-btn @click='deleteTask(task.id)'>削除</v-btn>
              <v-btn @click='updateTask(task.id)'>更新</v-btn>
-             <input v-model="putTask" type="text" name=""/>
+             <b-form-input v-model="putTask" type="text" class="putinput" size="20"></b-form-input>
         </li>
     </ul>
     </div>
@@ -70,3 +70,14 @@
     }
    }
 </script>
+
+
+<style scoped>
+.putinput{
+    width: 120px; 
+}
+
+.postinput{
+    width: 120px;
+}
+</style>

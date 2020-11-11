@@ -6,13 +6,15 @@ import axios from "axios";
 import VueAxiosPlugin from "./plugins/vue-axios";
 import Router from './router/router'
 import Header from '../header.vue'
-// import BootstrapVue from 'bootstrap-vue'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 
 
 Vue.use(Vuetify);
-// Vue.use(BootstrapVue);
+Vue.use(BootstrapVue);
 const vuetify = new Vuetify(); 
 Vue.use(VueAxiosPlugin, { axios: axios })
 
