@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm.js'
+import Vue from 'vue'
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import Task from '../task.vue'
