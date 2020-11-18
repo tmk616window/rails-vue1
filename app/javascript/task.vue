@@ -1,8 +1,12 @@
 <template>
-    <div>
+    <v-app>
+              <a href="/login">aaaa</a>
+
     <label for="">新規作成</label>
-    <v-text-field v-model="newTask" type="text" name="" class="postinput"/>
-    <button @click='createTask'>作成</button>
+    <div>
+        <v-text-field v-model="newTask" type="text" name="" class="postinput"/>
+        <v-btn @click='createTask'>作成</v-btn>
+    </div>
     <ul class="collection">
         <li v-for="task in tasks">
              <router-link :to="{name: 'task', params: {taskId: task.id}}" v-bind:for="'task_' + task.id">{{task.name}}</router-link>
@@ -12,8 +16,9 @@
              <b-form-input v-model="putTask" type="text" class="putinput" size="20"></b-form-input>
         </li>
     </ul>
-    </div>
+    </v-app>
 </template>
+
 
 <script>
    import axios from 'axios';

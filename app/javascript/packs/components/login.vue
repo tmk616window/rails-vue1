@@ -7,6 +7,7 @@
     <!--  <v-btn v-b-tooltip.hover title="ログイン">ログイン</v-btn>-->
     <!--</div>-->
     <b-container class="d-flex justify-content-center">
+      <v-app>
       <v-form class="login-form">
         <v-card-title>ログイン</v-card-title>
         <label for="">username</label>
@@ -17,7 +18,8 @@
         <v-text-field hint="最低10文字" counter=8 color="green darken-5" clearable class="login-input" type="password"></v-text-field>
         <v-btn>ログイン</v-btn>
     　    <router-link to="signup/">新規作成</router-link>
-    </v-form>
+      </v-form>
+    </v-app>
     </b-container>
 </template>
 

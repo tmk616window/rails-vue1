@@ -15,7 +15,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(Vuetify);
 Vue.use(BootstrapVue);
-const vuetify = new Vuetify(); 
+const vuetify = new Vuetify();
 Vue.use(VueAxiosPlugin, { axios: axios })
 
 var app = new Vue({

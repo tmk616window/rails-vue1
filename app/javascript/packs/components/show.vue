@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <v-app>
     <p>Index</p>
     
     <p>{{task.name}}</p>
      <p>nklsnskjlandkjankjbnxsa,.jcbnjskabdjksabdjklsabdjksabdkjlqw</p>
     　<router-link to="/">戻る</router-link>
-  </div>
+  </v-app>
 </template>
 
 
