@@ -9,10 +9,11 @@ import Header from '../header.vue'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VModal from 'vue-js-modal'
 
 
 
-
+Vue.use(VModal);
 Vue.use(Vuetify);
 Vue.use(BootstrapVue);
 const vuetify = new Vuetify();

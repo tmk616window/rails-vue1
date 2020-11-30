@@ -10,10 +10,7 @@
     <ul class="collection">
         <li v-for="task in tasks">
              <router-link :to="{name: 'task', params: {taskId: task.id}}" v-bind:for="'task_' + task.id">{{task.name}}</router-link>
-             <br>
              <v-btn @click='deleteTask(task.id)'>削除</v-btn>
-             <v-btn @click='updateTask(task.id)'>更新</v-btn>
-             <b-form-input v-model="putTask" type="text" class="putinput" size="20"></b-form-input>
         </li>
     </ul>
     </v-app>
