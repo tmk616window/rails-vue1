@@ -1,22 +1,12 @@
 <template>
-    <!--<div class="text-center my-3 login_form">-->
-    <!--  <v-card>-->
-    <!--  <v-text-field type="text" name=""/>-->
-    <!--  <v-text-field type="text" name=""/>-->
-    <!--</v-card>-->
-    <!--  <v-btn v-b-tooltip.hover title="ログイン">ログイン</v-btn>-->
-    <!--</div>-->
     <b-container class="d-flex justify-content-center">
+        <br><br><br>
       <v-form class="login-form">
         <v-card-title>新規登録</v-card-title>
-        <label for="">username</label>
-        <v-text-field hint="入力中。最大10文字" color="green darken-5" clearable class="login-input" v-model="newName"></v-text-field>
-        <label for="">email</label>
-        <v-text-field hint="入力中。最大10文字" color="green darken-5" clearable class="login-input" v-model="newEmail"></v-text-field>
-        <label for="">password</label>
-        <v-text-field hint="最低8文字" counter=8 color="green darken-5" clearable class="login-input" type="password" v-model="newPassword"></v-text-field>
-        <label for="">confirm password</label>
-        <v-text-field hint="最低10文字" counter=8 color="green darken-5" clearable class="login-input" type="password" v-model="newPassword_confirmation"></v-text-field>
+        <v-text-field hint="入力中。最大10文字" color="green darken-5" clearable class="login-input" v-model="newName" label="username"></v-text-field>
+        <v-text-field hint="入力中。最大10文字" color="green darken-5" clearable class="login-input" v-model="newEmail" label="email"></v-text-field>
+        <v-text-field hint="最低8文字" counter=8 color="green darken-5" clearable class="login-input" type="password" v-model="newPassword" label="password"></v-text-field>
+        <v-text-field hint="最低10文字" counter=8 color="green darken-5" clearable class="login-input" type="password" v-model="newPassword_confirmation" label="confirm password"></v-text-field>
         <v-btn @click="createUser">作成</v-btn>
     </v-form>
     </b-container>
