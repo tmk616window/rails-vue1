@@ -50,7 +50,6 @@
     </v-app>
 </template>
 <script>
-
    import Chart from './packs/components/chart.vue';
    import axios from 'axios';
     axios.defaults.headers.common = {
@@ -121,11 +120,9 @@
 .putinput{
     width: 120px; 
 }
-
 .postinput{
     width: 120px;
 }
-
 #chart{
     height: 220px;
     width: 250px;
@@ -142,13 +139,11 @@
 .box2{
     margin: 10px 10px 5px 10px;
 }
-
 .card{
     margin: 10px 10px 10px 10px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
 .string{
     background-color:#DCC2FF;
     display: inline-block;
@@ -158,18 +153,15 @@
     margin: 0;
     margin-bottom: 4px;
 }
-
 .string:hover {
     text-decoration:none;
 }
-
 .link{
   text-decoration: none;
 }
 .link:hover{
     text-decoration: none; /* リンクに出てくる下線を無効にする*/    
 }
-
 .user_image{
     width: 40px;
     height: 40px;

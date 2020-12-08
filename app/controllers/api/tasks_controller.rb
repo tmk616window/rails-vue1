@@ -5,6 +5,7 @@ class Api::TasksController < ApplicationController
   
   def show
       @task = Task.find(params[:id])
+      @protags = Protag.all
   end
 
   def create

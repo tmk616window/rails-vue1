@@ -4,12 +4,19 @@
       <br><br>
       <div>
       </div>
-<div v-for="(text,index) in texts">
-    <b-form-input type="text" v-model="texts[index]" size="20"></b-form-input>
-    <button type="button" @click="removeInput(index)">削除</button>
-</div>
-<p><button @click="addInput">追加する</button></p>
-<button @click="onSubmit">送信する</button>
+      
+<div v-for="protag in protags">
+    <!--<p>{{protag.tag}}</p>-->
+    <p v-text="protag.tag"></p>
+    <b-form-input type="text" color="red" v-model="putProtag"></b-form-input>
+</div>  
+<!--<div v-for="(text,index) in texts">-->
+<!--    <b-form-input type="text" v-model="texts[index]" size="20"></b-form-input>-->
+<!--    <button type="button" @click="removeInput(index)">削除</button>-->
+<!--</div>-->
+<!--<p><button @click="addInput">追加する</button></p>-->
+<button @click="onSubmit">追加する</button>
+<button @click="updateProtag">変更する</button>
 
     <div v-text="texts"></div>
       
@@ -112,23 +119,31 @@
      data: function () {
        return {
          id: this.$route.params.taskId,
+         protags: [],
          texts: [],
          task: [],
          task: {
              id: '',
              name: ''
          },
-         putTask: ''
+         putTask: '',
+         putProtag: ''
        }
      },
-    created: function(){
+    created(){
         this.fetchTasks(this.id);
+        this.fetchProtags(this.id);
     },
     methods: {
         fetchTasks(id) {
                 axios.get('/api/tasks/' + id ).then(response => {
                 this.task = response.data
             });
+        },
+        fetchProtags(id){
+                axios.get('/api/protags/' + id).then(response => {
+                this.protags = response.data.protags
+                });
         },
          updateTask(id) {
              axios.put('/api/tasks/' + id , {task: {name: this.putTask}}).then(response => {
@@ -145,14 +160,28 @@
         addInput() {
             this.texts.push('')
         },
-        onSubmit() {
+        onSubmit(id) {
             let params = new FormData()
-            params.append('task_id', this.texts)
+            params.append('task_id', this.id)
             axios.post('/api/protags', params)
                 .then(response => {
-                    
+                axios.get('/api/protags/' + id).then(response => {
+                this.protags = response.data.protags
+                });
                 })
         },
+         updateProtag(id) {
+             axios.put('/api/protags/' + id, {protags: {tag: this.putProtag}}).then(response => {
+                this.putProtag = '';
+                this.$modal.hide('hello-world');
+                axios.get('/api/tasks/' + id ).then(response => {
+                this.task = response.data
+                });
+                axios.get('/api/protags').then(response => {
+                this.protags = response.data.protags
+                });
+             });
+         },
         show() {
             this.$modal.show('hello-world');
         },

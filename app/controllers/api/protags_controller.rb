@@ -1,10 +1,11 @@
 class Api::ProtagsController < ApplicationController
   def index
-    @protags = Protag.all
+    @protags = Protag.where(params[:task_id])
   end
   
   def show
-      @pro_tag = Pro_tag.where(task_id: @task.id)
+    @protag = Protag.where(task_id: params[:id])
+  #     @protag = Protag.find_by(task_id: @task.id)
   end
 
   def create
@@ -16,14 +17,14 @@ class Api::ProtagsController < ApplicationController
     end
   end
 
-  # def update
-  #   @pro_tag = Pro_tag.find(params[:id])
-  #   if @pro_tag.update(task_params)
-  #     render :show, status: :ok
-  #   else
-  #     render json: @protag.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def update_all
+    @protag = Protag.where(task_id: @task.id)
+    if @protag.update_all(protag_params)
+      render :show, status: :ok
+    else
+      render json: @protag.errors, status: :unprocessable_entity
+    end
+  end
   
   def protag_params
      params.permit(:tag, :task_id)
