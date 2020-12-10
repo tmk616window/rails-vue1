@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VModal from 'vue-js-modal'
 import VueStar from 'vue-star'
-
+// import Protag from './components/protag.vue'
 
 Vue.component('VueStar', VueStar);
 Vue.use(VModal);

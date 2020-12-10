@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :tasks, only: [:index, :create, :update, :show, :destroy]
       resources :users, only: [:index, :create, :update, :show, :destroy]
       resources :sessions, only: [:new, :create, :destroy]
-      resources :protags, only: [:index,:create, :update, :destroy,:show, :update_all]
+      resources :protags, only: [:index,:create, :update, :destroy,:show]
       # put '/protags', 'protags#update'
       put :protags, to: 'protags#update_all'
       # get :protags, to: 'protags/'

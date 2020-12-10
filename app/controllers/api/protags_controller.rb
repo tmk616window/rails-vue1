@@ -17,16 +17,25 @@ class Api::ProtagsController < ApplicationController
     end
   end
 
-  def update_all
-    @protag = Protag.where(task_id: @task.id)
-    if @protag.update_all(protag_params)
+  def update
+    @protag = Protag.find(params[:id])
+    if @protag.update(protag_params)
       render :show, status: :ok
     else
       render json: @protag.errors, status: :unprocessable_entity
     end
   end
-  
+
+  def destroy
+    @protag = Protag.find(params[:id])
+    if @protag.destroy
+      head :no_content
+    else
+      render json: @protag.errors, status: :unprocessable_entity
+    end
+  end
+
   def protag_params
-     params.permit(:tag, :task_id)
+     params.require(:protag).permit(:tag, :task_id)
   end
 end

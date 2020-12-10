@@ -4,37 +4,37 @@
       <br><br>
       <div>
       </div>
-      
-<div v-for="protag in protags">
-    <!--<p>{{protag.tag}}</p>-->
-    <p v-text="protag.tag"></p>
-    <b-form-input type="text" color="red" v-model="putProtag"></b-form-input>
-</div>  
-<!--<div v-for="(text,index) in texts">-->
-<!--    <b-form-input type="text" v-model="texts[index]" size="20"></b-form-input>-->
-<!--    <button type="button" @click="removeInput(index)">削除</button>-->
-<!--</div>-->
-<!--<p><button @click="addInput">追加する</button></p>-->
-<button @click="onSubmit">追加する</button>
-<button @click="updateProtag">変更する</button>
 
-    <div v-text="texts"></div>
-      
+
+
+<!--<div v-for="protag in protags">-->
+<!--    <p>{{protag.tag}}</p>-->
+<!--</div>-->
+
+
 <div class="show_box">
     <div class="card">
     <div>
         <chart class="chart"></chart>
         <div class="box">
-            
+                     <p class="article">
+                         ・開発言語
+                            <v-btn dark fab color="red" class="add-button-icon" @click="addInput">＋</v-btn>
+                            <button type="button" @click="onSubmit" class="add-button-protag">送信</button>
+                         </p>
                      <div class="lang">
-                        <p class="article">・開発言語</p>
-                        <p class="string">vue.js</p> 
-                        <p class="string">php</p> 
-                        <p class="string">php</p> 
-                        <p class="string">javascript</p>
-                     </div>
-                     <div class="lang">
+                        <p v-for="protag in protags" class="string">
+                            {{protag.tag}}
+                            <v-icon @click="deleteProtag(protag.id)">mdi-delete</v-icon>
+                        </p>
+                        <p v-for="(text,index) in texts" class="string">
+                            <input type="text" v-model="texts[index]" size=10>
+                            <!--<button type="button" @click="removeInput(index)">削除</button>-->
+                            <v-btn dark fab color="red" class="add-button-icon" @click="removeInput(index)">－</v-btn>
+                        </p>
+                     </div>    
                         <p class="article">・インフラ</p>
+                     <div class="lang">
                         <p class="string">vue.js</p> 
                         <p class="string">php</p> 
                         <p class="string">php</p> 
@@ -44,12 +44,12 @@
                         <p class="string">javascript</p>
                         <p class="string">javascript</p>
                      </div>
-                     <div class="lang">
                         <p class="article">・URL</p>
+                     <div class="lang">
                         <a href="https://644b6d9b325a4fff87a89af4cf0fc21d.vfs.cloud9.ap-northeast-1.amazonaws.com/22">https://644b6d9b325a4fff87a89af4cf0fc21d.vfs.cloud9.ap-northeast-1.amazonaws.com/22</a>
                      </div>
-                     <div class="lang">
                         <p class="article">・会社</p>
+                     <div class="lang">
                         自社開発
                         社員数：20人
                         新卒
@@ -85,8 +85,6 @@
     </div>
 </div>              
 </div>
-
-
         <div class="message">
             <p>メッセージ</p>
             <div class="message_box">
@@ -116,11 +114,12 @@
       components: {
         Chart
       },
-     data: function () {
+     data() {
        return {
          id: this.$route.params.taskId,
+         protag: [],
          protags: [],
-         texts: [],
+         texts:[],
          task: [],
          task: {
              id: '',
@@ -160,16 +159,6 @@
         addInput() {
             this.texts.push('')
         },
-        onSubmit(id) {
-            let params = new FormData()
-            params.append('task_id', this.id)
-            axios.post('/api/protags', params)
-                .then(response => {
-                axios.get('/api/protags/' + id).then(response => {
-                this.protags = response.data.protags
-                });
-                })
-        },
          updateProtag(id) {
              axios.put('/api/protags/' + id, {protags: {tag: this.putProtag}}).then(response => {
                 this.putProtag = '';
@@ -182,18 +171,41 @@
                 });
              });
          },
+        removeInput(index) {
+            this.texts.splice(index, 1);
+        },
+        addInput() {
+            this.texts.push(''); 
+        },
+        onSubmit() {
+            for(let i = 0; i < this.texts.length; i++) {
+             axios.post('/api/protags', {protag: {tag: this.texts[i],task_id: this.id}}).then(res => {
+                axios.get('/api/protags/' + this.id).then(response => {
+                this.protags = response.data.protags
+                });
+                 this.texts.splice(0)
+             })
+           }
+        },
+        deleteProtag(id){
+             axios.delete('/api/protags/' + id ).then(response => {
+                axios.get('/api/protags/' + this.id).then(response => {
+                this.protags = response.data.protags
+                });
+             });
+        },
         show() {
             this.$modal.show('hello-world');
         },
         hide() {
             this.$modal.hide('hello-world');
         },
+        
     }
    }
 </script>
 
 <style scoped>
-
 .like p{
     border: solid 1px black;
     display: inline-block;
@@ -203,17 +215,14 @@
     /*margin-right: 30px;*/
     /*float: left;*/
 }
-
 .like{
     margin-top:20px;
     margin-left: 20px;
     /*float: right;*/
 }
-
 .show_box{
     margin: 0 auto;
 }
-
 .chart{
     padding: 5px 5px 5px 5px;
     margin-right: 10px;
@@ -228,7 +237,6 @@
     margin-left: 20px;
     float: left;
 }    
-
 .card{
     background-color: #FFFAFA;
     padding-top: 20px;
@@ -238,7 +246,6 @@
     margin:0 auto;
     float: left;
 }
-
 .string{
     background-color:#DCC2FF;
     display: inline-block;
@@ -246,35 +253,29 @@
     color: white;
     text-decoration:none;
     margin: 0;
+    margin-right: 5px;
     margin-bottom: 4px;
 }
-
 .lang{
     margin: 5px 5px 5px 5px;
         /*display: inline-block;*/
-
 }
-
-
 .box{
     /*border: solid 1px black;*/
     display: inline-block;
     width: 500px;
     height: 320px;
 }
-
 .article{
     color: black;
     margin: 0;
+    margin-left: 5px;
     font-weight:700;
 }
-
 .comment_string{
     margin: 0;
     margin-left: 20px;
 }    
-
-
 .comment{
     border: solid 1px black;
     margin-right: 10px;
@@ -284,20 +285,25 @@
     border: solid 4px #EEEEEE;
     border-radius: 10px;
 }
-
 .user_box{
     margin-left: 50px;
     border: solid 1px black;
     float: left;
 }
-
 .message{
     margin-left: 320px;
 }
-
-
 .messsage_name{
     float: left;
     margin-right: 5px;
+}
+
+.add-button-icon{
+    height: 18px;
+    width: 18px;
+}
+
+.add-button-protag{
+    background-color:yellow;
 }
 </style>

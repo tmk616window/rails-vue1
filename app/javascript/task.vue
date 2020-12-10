@@ -106,8 +106,8 @@
              });
          },
          deleteTask(id) {
-            axios.delete('/api/tasks/' + id ).then(response => {
-                axios.get('/api/tasks').then(response => {
+            axios.delete('/api/task/' + id ).then(response => {
+                axios.get('/api/task').then(response => {
                 this.tasks = response.data.tasks
                 });
             });
