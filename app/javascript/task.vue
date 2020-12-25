@@ -2,6 +2,7 @@
     <v-app>
     <a href="/login">aaaa</a>
     <label for="">新規作成</label>
+    <p>{{userLogin}}</p>
     <div>
         <v-text-field v-model="newTask" type="text" name="" class="postinput"/>
         <v-btn @click='createTask'>作成</v-btn>
@@ -73,8 +74,8 @@
        }
      },
      mounted () {
-        this.$refs.ThumbsUp.$data.active = true;
-        console.log(this.$refs.ThumbsUp.$data);
+        // this.$refs.ThumbsUp.$data.active = true;
+        // console.log(this.$refs.ThumbsUp.$Adata);
      },
      created(){
          this.fetchTasks();
@@ -112,7 +113,13 @@
                 });
             });
         },
+    },
+  computed:{
+    userLogin(){
+      return this.$store.getters.login
     }
+  }
+    
    }
 </script>
 

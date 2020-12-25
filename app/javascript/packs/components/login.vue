@@ -1,22 +1,11 @@
 <template>
-    <!--<div class="text-center my-3 login_form">-->
-    <!--  <v-card>-->
-    <!--  <v-text-field type="text" name=""/>-->
-    <!--  <v-text-field type="text" name=""/>-->
-    <!--</v-card>-->
-    <!--  <v-btn v-b-tooltip.hover title="ログイン">ログイン</v-btn>-->
-    <!--</div>-->
     <b-container class="d-flex justify-content-center">
       <v-app>
       <v-form class="login-form">
         <v-card-title>ログイン</v-card-title>
-        <label for="">username</label>
-        <v-text-field hint="入力中。最大10文字" color="green darken-5" clearable class="login-input"></v-text-field>
-        <label for="">password</label>
-        <v-text-field hint="最低8文字" counter=8 color="green darken-5" clearable class="login-input" type="password"></v-text-field>
-        <label for="">confirm password</label>
-        <v-text-field hint="最低10文字" counter=8 color="green darken-5" clearable class="login-input" type="password"></v-text-field>
-        <v-btn>ログイン</v-btn>
+        <v-text-field v-model="loginEmail" hint="入力中。最大10文字" label="email" color="green darken-5" clearable class="login-input"></v-text-field>
+        <v-text-field v-model="loginPassword" hint="最低8文字" counter=8 color="green darken-5" clearable class="login-input" label="password" type="password"></v-text-field>
+        <v-btn @click="Logined">ログイン</v-btn>
     　    <router-link to="signup/">新規作成</router-link>
       </v-form>
     </v-app>
@@ -24,7 +13,41 @@
 </template>
 
 <script>
+   import axios from 'axios';
+    axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
   export default {
+         data() {
+           return {
+             loginEmail: '',
+             loginPassword: ''
+           }
+         },
+         methods: {
+            //  Logined(){
+            //         this.$store.dispatch('isLoggedIn')
+            // },
+                Logined(){
+                     axios.post('/api/sessions', {session: {email: this.loginEmail, password: this.loginPassword}})
+                    .then(res => {
+                        this.loginEmail = '',
+                        this.loginPassword = '',
+                        this.$store.dispatch('isLoggedIn')
+                    // this.$stroe.commit('getUser', res.data)
+                })
+            }
+            
+         },
+         computed:{
+            // loginEmail(){
+            //   return this.$store.state.loginEmail
+            // },
+            // loginPassword(){
+            //   return this.$store.state.loginPassword
+            // }
+         }
   }
 </script>
 

@@ -5,12 +5,15 @@ Rails.application.routes.draw do
    get '/login', to: 'home#index'
    get '/:id', to: 'home#index'
    get '/signup', to: 'home#index'
+
+
          
    namespace :api, format: 'json' do
       resources :tasks, only: [:index, :create, :update, :show, :destroy]
       resources :users, only: [:index, :create, :update, :show, :destroy]
-      resources :sessions, only: [:new, :create, :destroy]
+      resources :sessions, only: [:new, :create, :destroy,:show, :index]
       resources :protags, only: [:index,:create, :update, :destroy,:show]
+      resources :login, only: [:index,:create, :update, :destroy,:show]
       # put '/protags', 'protags#update'
       put :protags, to: 'protags#update_all'
       # get :protags, to: 'protags/'

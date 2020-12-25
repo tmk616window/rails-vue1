@@ -7,6 +7,8 @@
       >
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title class="bar-title">ENJOB</v-toolbar-title>
+        <!--<P>{{usermane}}</P>-->
+        <p>{{userLogin}}</p>
       </v-app-bar>
       <v-navigation-drawer
         v-model="drawer"
@@ -46,6 +48,20 @@ export default {
   data () {
     return {
       drawer: false,
+    }
+  },
+  created(){
+    // this.usermane();
+    // this.userLogin();
+  },
+  methods:{
+    usermane() {
+      return this.$store.state.user.name
+    },
+  },
+  computed:{
+    userLogin(){
+      return this.$store.getters.login
     }
   }
 }

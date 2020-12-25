@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VModal from 'vue-js-modal'
 import VueStar from 'vue-star'
-// import Protag from './components/protag.vue'
+import Store  from './store/store.js'
 
 Vue.component('VueStar', VueStar);
 Vue.use(VModal);
@@ -21,7 +21,8 @@ const vuetify = new Vuetify();
 Vue.use(VueAxiosPlugin, { axios: axios })
 
 var app = new Vue({
-    vuetify, 
+    vuetify,
+    store: Store,
     router: Router,
     el: '#app',
     components: {

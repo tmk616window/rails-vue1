@@ -6,12 +6,6 @@
       </div>
 
 
-
-<!--<div v-for="protag in protags">-->
-<!--    <p>{{protag.tag}}</p>-->
-<!--</div>-->
-
-
 <div class="show_box">
     <div class="card">
     <div>
