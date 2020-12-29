@@ -22,7 +22,8 @@
          data() {
            return {
              loginEmail: '',
-             loginPassword: ''
+             loginPassword: '',
+             s: false
            }
          },
          methods: {

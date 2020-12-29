@@ -7,8 +7,16 @@
       >
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title class="bar-title">ENJOB</v-toolbar-title>
-        <!--<P>{{usermane}}</P>-->
-        <p>{{userLogin}}</p>
+        <p>{{userLogin.name}}</p>
+      <div v-if="userLogin.name">
+        <button @click="logout">ログアウと</button>
+      </div>
+      <div v-else>
+      </div>
+
+
+
+        
       </v-app-bar>
       <v-navigation-drawer
         v-model="drawer"
@@ -34,6 +42,13 @@
               <v-list-item-title >ログイン</v-list-item-title>
             </v-list-item>
             </router-link>
+
+            <router-link to="#" @click="logout" class="link">
+            <v-list-item>
+              <v-list-item-title >ログアウト</v-list-item-title>
+            </v-list-item>
+            </router-link>
+
             
           </v-list-item-group>
         </v-list>
@@ -53,16 +68,27 @@ export default {
   created(){
     // this.usermane();
     // this.userLogin();
+    this.logout();
   },
   methods:{
-    usermane() {
-      return this.$store.state.user.name
+    logout(){
+      this.$store.dispatch('logout')
     },
+    // usersigned(){
+    //   this.$store.commit('Signined')
+    // }
   },
   computed:{
     userLogin(){
       return this.$store.getters.login
+    },
+    userSignined(){
+      return this.$store.getters.signined
+    },
+    a(){
+      return this.$store.getters.a
     }
+    
   }
 }
 </script>
